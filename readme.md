@@ -62,6 +62,19 @@ mvn spring-boot:run
 Nach dem erfolgreichen Start ist die Weboberfläche über folgenden Link erreichbar:
 http://localhost:8080
 
+---
+
+## Kurzanleitung für Testperson
+
+Projekt klonen und starten (siehe Setup oben)
+Im Browser öffnen: http://localhost:8080/nets
+Testen Sie folgende Funktionen:
+   - Neues Geisternetz melden
+   - Neue Person erfassen
+   - Status ändern (z. B. als geborgen markieren)
+   - Meldung anonym absenden
+   - Tabelle aktualisiert sich nach jedem Schritt
+Optional: Datenbankeinträge prüfen (MySQL)
 
 
 Autorin
