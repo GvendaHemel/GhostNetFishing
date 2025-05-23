@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Netze als geborgen markieren</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #219150;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Netze als geborgen markieren</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Koordinaten</th>
+        <th>Größe</th>
+        <th>Status</th>
+        <th>Bergende Person</th>
+        <th>Aktion</th>
+    </tr>
+    <tr th:each="netz : ${offeneNetze}">
+        <td th:text="${netz.id}"></td>
+        <td th:text="${netz.gpsKoordinaten}"></td>
+        <td th:text="${netz.groesse}"></td>
+        <td th:text="${netz.status}"></td>
+        <td th:text="${netz.bergendePerson != null ? netz.bergendePerson.name : 'Keine'}"></td>
+        <td>
+            <form th:action="@{/nets/done}" method="post">
+                <input type="hidden" name="id" th:value="${netz.id}" />
+                <button type="submit">Als geborgen markieren</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<a class="back-link" href="/nets">Zurück zur Übersicht</a>
+
+</body>
+</html>

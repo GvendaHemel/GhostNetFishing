@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Ghost Net Fishing</title>
+</h:head>
+<h:body>
+    <h1>Geisternetze</h1>
+
+    <!-- Tabelle zur Anzeige der Geisternetze -->
+    <h:dataTable value="#{geisternetzBean.geisternetze}" var="geisternetz">
+        <h:column>
+            <f:facet name="header">GPS-Koordinaten</f:facet>
+            #{geisternetz.gpsKoordinaten}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Größe</f:facet>
+            #{geisternetz.groesse}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Status</f:facet>
+            #{geisternetz.status}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Meldende Person</f:facet>
+            #{geisternetz.meldendePerson.name}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Bergende Person</f:facet>
+            #{geisternetz.bergendePerson.name}
+        </h:column>
+    </h:dataTable>
+
+    <!-- Formular zum Hinzufügen eines neuen Geisternetzes -->
+    <h:form>
+        <h2>Neues Geisternetz erfassen</h2>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="gpsKoordinaten" value="GPS-Koordinaten:" />
+            <h:inputText id="gpsKoordinaten" value="#{geisternetzBean.geisternetz.gpsKoordinaten}" required="true" />
+
+            <h:outputLabel for="groesse" value="Größe:" />
+            <h:inputText id="groesse" value="#{geisternetzBean.geisternetz.groesse}" required="true" />
+
+            <h:outputLabel for="status" value="Status:" />
+            <h:selectOneMenu id="status" value="#{geisternetzBean.geisternetz.status}" required="true">
+                <f:selectItem itemValue="Gemeldet" itemLabel="Gemeldet" />
+                <f:selectItem itemValue="Bergung bevorstehend" itemLabel="Bergung bevorstehend" />
+                <f:selectItem itemValue="Geborgen" itemLabel="Geborgen" />
+                <f:selectItem itemValue="Verschollen" itemLabel="Verschollen" />
+            </h:selectOneMenu>
+
+            <h:outputLabel for="meldendePerson" value="Meldende Person:" />
+            <h:selectOneMenu id="meldendePerson" value="#{geisternetzBean.geisternetz.meldendePerson}" required="true">
+                <f:selectItems value="#{geisternetzBean.personen}" var="person" itemValue="#{person}" itemLabel="#{person.name}" />
+            </h:selectOneMenu>
+
+            <h:outputLabel for="bergendePerson" value="Bergende Person:" />
+            <h:selectOneMenu id="bergendePerson" value="#{geisternetzBean.geisternetz.bergendePerson}">
+                <f:selectItems value="#{geisternetzBean.personen}" var="person" itemValue="#{person}" itemLabel="#{person.name}" />
+            </h:selectOneMenu>
+        </h:panelGrid>
+
+        <h:commandButton value="Speichern" action="#{geisternetzBean.speichern}" />
+    </h:form>
+</h:body>
+</html>

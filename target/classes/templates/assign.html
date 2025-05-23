@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bergung übernehmen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        select, input[type="submit"], button {
+            padding: 6px;
+            font-size: 14px;
+        }
+
+        form {
+            margin: 0;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Netze ohne Bergung</h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Koordinaten</th>
+            <th>Größe</th>
+            <th>Status</th>
+            <th>Bergende Person</th>
+            <th>Aktion</th>
+        </tr>
+        <tr th:each="netz : ${offeneNetze}">
+            <td th:text="${netz.id}"></td>
+            <td th:text="${netz.gpsKoordinaten}"></td>
+            <td th:text="${netz.groesse}"></td>
+            <td th:text="${netz.status}"></td>
+            <td th:text="${netz.bergendePerson != null ? netz.bergendePerson.name : 'Keine'}"></td>
+            <td>
+                <form th:action="@{/nets/assign}" method="post">
+                    <input type="hidden" name="netzId" th:value="${netz.id}" />
+                    <select name="personId" required>
+                        <option value="">-- Bitte wählen --</option>
+                        <option th:each="p : ${personen}" th:value="${p.id}" th:text="${p.name}"></option>
+                    </select>
+                    <button type="submit">Übernehmen</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <a href="/nets">Zurück zur Übersicht</a>
+</body>
+</html>
+
+

@@ -1,9 +1,54 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Ghost Net Fishing</title>
-    </h:head>
-    <h:body>
-        <h1>Willkommen zur Ghost Net Fishing Web-App</h1>
-    </h:body>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Ghost Net Fishing</title>
+</h:head>
+
+<h:body>
+    <h1>Willkommen zur Ghost Net Fishing Web-App</h1>
+
+    <!-- Formular zur Eingabe eines neuen Geisternetzes -->
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="gps" value="GPS-Koordinaten:" />
+            <h:inputText id="gps" value="#{geisternetzBean.neuesGeisternetz.gpsKoordinaten}" required="true"/>
+            
+            <h:outputLabel for="groesse" value="Größe:" />
+            <h:inputText id="groesse" value="#{geisternetzBean.neuesGeisternetz.groesse}" required="true"/>
+            
+            <h:outputLabel for="status" value="Status:" />
+            <h:selectOneMenu id="status" value="#{geisternetzBean.neuesGeisternetz.status}">
+                <f:selectItem itemValue="Gefunden" itemLabel="Gefunden"/>
+                <f:selectItem itemValue="Entfernt" itemLabel="Entfernt"/>
+                <f:selectItem itemValue="Unbekannt" itemLabel="Unbekannt"/>
+            </h:selectOneMenu>
+        </h:panelGrid>
+
+        <h:commandButton value="Speichern" action="#{geisternetzBean.speichern}"/>
+    </h:form>
+
+    <!-- Tabelle zur Anzeige der gespeicherten Geisternetze -->
+    <h:dataTable value="#{geisternetzBean.geisternetze}" var="netz" border="1">
+        <h:column>
+            <f:facet name="header">ID</f:facet>
+            <h:outputText value="#{netz.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">GPS-Koordinaten</f:facet>
+            <h:outputText value="#{netz.gpsKoordinaten}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Größe</f:facet>
+            <h:outputText value="#{netz.groesse}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Status</f:facet>
+            <h:outputText value="#{netz.status}"/>
+        </h:column>
+    </h:dataTable>
+</h:body>
 </html>
+

@@ -1,0 +1,7 @@
+com\ghostnet\GeisternetzBean.class
+com\ghostnet\controller\HomeController.class
+com\ghostnet\model\Geisternetz.class
+com\ghostnet\model\Person.class
+com\ghostnet\GhostnetFishingApplication.class
+com\ghostnet\dao\GeisternetzRepository.class
+com\ghostnet\dao\PersonRepository.class

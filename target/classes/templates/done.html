@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Bergung übernehmen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        select, button {
+            padding: 5px;
+            font-size: 0.95em;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Netze ohne Bergung</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Koordinaten</th>
+        <th>Größe</th>
+        <th>Status</th>
+        <th>Bergende Person</th>
+        <th>Aktion</th>
+    </tr>
+    <tr th:each="netz : ${offeneNetze}">
+        <td th:text="${netz.id}"></td>
+        <td th:text="${netz.gpsKoordinaten}"></td>
+        <td th:text="${netz.groesse}"></td>
+        <td th:text="${netz.status}"></td>
+        <td th:text="${netz.bergendePerson != null ? netz.bergendePerson.name : 'Keine'}"></td>
+        <td>
+            <!-- Übernehmen -->
+            <form th:action="@{/nets/assign}" method="post">
+                <input type="hidden" name="netzId" th:value="${netz.id}" />
+                <select name="personId" required>
+                    <option value="">-- Person wählen --</option>
+                    <option th:each="p : ${personen}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+                <button type="submit">Übernehmen</button>
+            </form>
+
+            <!-- Als geborgen markieren (nur wenn Bergende Person gesetzt ist) -->
+            <form th:if="${netz.bergendePerson != null}" th:action="@{/done}" method="post">
+                <input type="hidden" name="netzId" th:value="${netz.id}" />
+                <input type="hidden" name="personId" th:value="${netz.bergendePerson.id}" />
+                <button type="submit">Als geborgen markieren</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<a class="back-link" href="/nets">Zurück zur Übersicht</a>
+
+</body>
+</html>
