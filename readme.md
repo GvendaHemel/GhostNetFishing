@@ -54,6 +54,15 @@ MySQL-Datenbank starten:
 Danach muss die MySQL-Datenbank gestartet werden.
 Falls notwendig, kann ein vorbereitetes SQL-Skript aus dem Verzeichnis /db ausgeführt werden, um Tabellen und Beispieldaten zu erstellen
 
+Die Datenbankverbindung erfolgt über die Konfigurationsdatei `application.properties`.  
+Hier ein Beispiel für eine lokale MySQL-Instanz:
+
+spring.datasource.url=jdbc:mysql://localhost:3306/ghostnet  
+spring.datasource.username=root  
+spring.datasource.password=1234
+
+Die Tabellen werden automatisch durch JPA/Hibernate beim Start der Anwendung erzeugt.
+
 Sobald die Datenbank bereitsteht, kann die Anwendung mit folgendem Befehl gestartet werden: 
 ```bash
 mvn spring-boot:run
