@@ -1,124 +1,73 @@
-Ghost Net Fishing
+# Ghost Net Fishing
 
-Projektbeschreibung
+Ghost Net Fishing ist eine Webanwendung, die im Rahmen einer Fallstudie im Studiengang Informatik an der IU Internationale Hochschule entwickelt wurde. Ziel der Anwendung ist es, die Meldung und Bergung sogenannter Geisternetze in den Weltmeeren digital zu unterstützen. Geisternetze sind herrenlose Fischernetze, die im Meer treiben und eine ernste Bedrohung für Meereslebewesen und die Umwelt darstellen.
 
-Ghost Net Fishing ist eine Webanwendung, die darauf abzielt, die Meldung und Bergung sogenannter Geisternetze in den Weltmeeren zu erleichtern. Geisternetze sind herrenlose Fischernetze, die im Meer treiben und eine erhebliche Gefahr für Meereslebewesen und die Umwelt darstellen.
+Die Anwendung ermöglicht es meldenden Personen, Netze mit Standortdaten und geschätzter Größe zu erfassen. Bergende Personen können sich für die Bergung registrieren und den Status eines Netzes aktualisieren. Eine Anmeldung oder Registrierung ist nicht erforderlich – die Bedienung ist bewusst niedrigschwellig gehalten. Der Status eines Netzes lässt sich im Laufe des Prozesses verändern: von „GEMELDET“ über „IN BERGUNG“ bis hin zu „GEBORGEN“ oder „VERSCHOLLEN“. 
 
-Die Anwendung ermöglicht es:
+Die Anwendung wurde als funktionaler Prototyp konzipiert, mit dem Ziel, eine einfache, benutzerfreundliche Oberfläche bereitzustellen, die gleichzeitig eine verlässliche Datenspeicherung über eine relationale Datenbank sicherstellt. Die technische Umsetzung basiert auf modernen Java-Technologien im Backend und einem komponentenbasierten Frontend mit JSF.
 
-Meldenden Personen, Geisternetze mit Standortdaten und geschätzter Größe zu erfassen.
+---
 
-Bergenden Personen, sich für die Bergung von Geisternetzen zu registrieren und deren Status zu aktualisieren.
+## Technologien
 
-Den aktuellen Status der gemeldeten Netze einzusehen.
+- **Frontend:** HTML, JSF (JavaServer Faces), ggf. PrimeFaces  
+- **Backend:** Java, Spring Boot, CDI, JPA (Hibernate)  
+- **Datenbank:** MySQL  
+- **Architektur:** MVC (Model-View-Controller)
 
-Projektziele
+---
 
-Entwicklung eines funktionalen Prototyps zur Erfassung und Verwaltung von Geisternetzen.
+## Datenmodell (Kurzbeschreibung)
 
-Bereitstellung einer benutzerfreundlichen Weboberfläche für meldende und bergende Personen.
+- **Geisternetz:** ID, Koordinaten, Größe, Status, meldende/bergende Person  
+- **Person:** ID, Name, Telefonnummer  
+- **Bergung:** Zuordnung zwischen Geisternetz und bergender Person
 
-Gewährleistung einer sicheren und effizienten Datenverwaltung durch persistente Speicherung in einer relationalen Datenbank.
+---
 
-Anforderungen
+## Voraussetzungen
 
-Die Webanwendung soll folgende Kernfunktionen umfassen:
+- Java 17 oder neuer  
+- Maven  
+- Laufender MySQL-Server  
+- Ein moderner Webbrowser (z. B. Chrome oder Firefox)
 
-MUST: Meldende Personen können Geisternetze (anonym) erfassen.
+---
 
-MUST: Bergende Personen können sich zur Bergung registrieren.
+## Setup und Ausführung
 
-MUST: Bergende Personen können den Status von Geisternetzen aktualisieren.
+1. Repository klonen:
 
-COULD: Kartenbasierte Anzeige der noch nicht geborgenen Netze.
+   ```bash
+   git clone https://github.com/GvendaHemel/GhostNetFishing.git
+   cd GhostNetFishing
+   ```
 
-COULD: Benutzerfreundliche Filter- und Suchfunktionen.
-
-Installation und Nutzung
-
-Voraussetzungen
-
-Java 11+
-
-Maven
-
-MySQL-Datenbank
-
-Ein Webbrowser zur Nutzung der Anwendung
-
-Schritte zur Installation
-
-Repository klonen:
-
-git clone https://github.com/yourusername/ghost-net-fishing.git
-
-In das Projektverzeichnis wechseln:
-
-cd ghost-net-fishing
-
-Abhängigkeiten installieren und Projekt kompilieren:
-
+Projekt bauen:
+Das Projekt wird mit dem folgenden Befehl gebaut. Dadurch wird der Quellcode kompiliert und alle notwendigen Abhängigkeiten automatisch heruntergeladen.
+```bash 
 mvn clean install
+```
 
-Datenbank einrichten:
 
-MySQL-Server starten
+MySQL-Datenbank starten:
+Danach muss die MySQL-Datenbank gestartet werden.
+Falls notwendig, kann ein vorbereitetes SQL-Skript aus dem Verzeichnis /db ausgeführt werden, um Tabellen und Beispieldaten zu erstellen
 
-SQL-Skript aus dem Ordner /db ausführen
-
-Anwendung starten:
-
+Sobald die Datenbank bereitsteht, kann die Anwendung mit folgendem Befehl gestartet werden: 
+```bash
 mvn spring-boot:run
+```
 
-Die Anwendung ist unter http://localhost:8080 erreichbar.
+Nach dem erfolgreichen Start ist die Weboberfläche über folgenden Link erreichbar:
+http://localhost:8080
 
-Technologien
 
-Frontend: JSF (JavaServer Faces), PrimeFaces
 
-Backend: Java EE (CDI, JPA)
+Autorin
+Dieses Projekt wurde im Rahmen einer Fallstudie an der IU Internationale Hochschule entwickelt von:
 
-Datenbank: MySQL
+Gvantsa Gogrichiani
+GitHub: @GvendaHemel
 
-Persistenz-Provider: Hibernate
-
-Datenbankstruktur
-
-Die Datenbank enthält folgende Tabellen:
-
-Geisternetz (ID, Standort, Größe, Status)
-
-Person (ID, Name, Telefonnummer, Rolle)
-
-Bergung (Netz_ID, Person_ID, Status)
-
-Systemarchitektur
-
-Die Architektur folgt dem MVC-Muster (Model-View-Controller) und beinhaltet:
-
-Model: JPA-Entitäten zur Abbildung der Datenbankstrukturen.
-
-View: JSF-Seiten zur Benutzerinteraktion.
-
-Controller: CDI-Beans zur Geschäftslogik.
-
-Mitwirkende
-
-[Dein Name] (Projektleitung und Entwicklung)
-
-[Teammitglied] (Backend-Entwicklung)
-
-[Teammitglied] (Frontend-Entwicklung)
-
-Lizenz
-
-Dieses Projekt steht unter der MIT-Lizenz. Weitere Informationen findest du in der Datei LICENSE.md.
-
-Kontakt
-
-Bei Fragen oder Anregungen wenden Sie sich an:
-
-E-Mail: support@ghostnetfishing.com
-
-GitHub-Issue-Tracker: https://github.com/yourusername/ghost-net-fishing/issues
 
